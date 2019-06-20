@@ -71,6 +71,19 @@ app.patch('/users/:id', async (req, res) => {
 	}
 });
 
+//User Delete
+app.delete('/users/:id', async (req, res) => {
+	const user = await User.findByIdAndDelete(req.params.id);
+	try {
+		if (!user) {
+			return res.status(404).send('No such user found');
+		}
+		res.send(user);
+	} catch (error) {
+		res.status(400).send(error);
+	}
+});
+
 // Task CRUD
 
 //Task Create
@@ -130,6 +143,19 @@ app.patch('/tasks/:id', async (req, res) => {
 			res.status(404).send({ error: 'no such task found' });
 		}
 
+		res.send(task);
+	} catch (error) {
+		res.status(400).send(error);
+	}
+});
+
+//Task Delete
+app.delete('/tasks/:id', async (req, res) => {
+	const task = await Task.findByIdAndDelete(req.params.id);
+	try {
+		if (!task) {
+			return res.status(404).send('No such task found');
+		}
 		res.send(task);
 	} catch (error) {
 		res.status(400).send(error);
