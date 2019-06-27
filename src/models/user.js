@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema(
 			default: 0,
 			validate(value) {
 				if (value < 0) {
-					throw new Error('Age must be a positive number');
+					throw new Error('Age must be a postive number');
 				}
 			}
 		},
@@ -50,7 +50,10 @@ const userSchema = new mongoose.Schema(
 					required: true
 				}
 			}
-		]
+		],
+		avatar: {
+			type: Buffer
+		}
 	},
 	{
 		timestamps: true
